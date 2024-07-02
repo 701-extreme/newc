@@ -1,0 +1,7 @@
+#!/bin/bash
+cp ./newc_file /usr/bin/newc_file
+cp ./newc_project /usr/bin/newc_project
+chown root: /usr/bin/newc_file
+chown root: /usr/bin/newc_project
+chmod 755 /usr/bin/newc_file
+chmod 755 /usr/bin/newc_project

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+file=$1
+
+if [ "$#" -ne "1" ]; then
+	echo "Usage: nc_file [filename]"
+	exit 0
+fi
+
+if [ -f ./$file ]; then
+  echo "File already exist."
+  exit 0
+fi
+
+echo "#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+	return 0;
+}" > $file.c
+echo "$file.c is created"
