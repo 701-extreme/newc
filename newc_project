@@ -7,9 +7,18 @@ if [ "$#" -lt "1" ]; then
 	exit 0
 fi
 
-if [ -d ./$dir ]; then
+if [ -d ./$dir ] && [ "$dir" != "." ]; then
 	echo "$dir already exist in current folder."
 	exit 0
+fi
+
+targetname=$dir
+if [ "$targetname" == "." ]; then
+	targetname="${PWD##*/}"
+	if [ -f ./$targetname ]; then
+		echo "Please specify a targetname for the project"
+		exit 0
+	fi
 fi
 
 mkdir ./$dir
@@ -27,7 +36,7 @@ if [ "$#" -gt 1 ]; then
 fi
 
 echo -n "main.o
-TARGET=$dir
+TARGET=$targetname
 MAIN_SOURCE=">>./$dir/Makefile;
 
 if [ "$#" -gt 1 ]; then
