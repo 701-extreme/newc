@@ -2,8 +2,8 @@
 
 file=$1
 
-if [ "$#" -ne "1" ]; then
-	echo "Usage: nc_file [filename]"
+if [ "$#" -lt "1" ]; then
+	echo "Usage: newc_file [filename] [optional: function_name]"
 	exit 0
 fi
 
@@ -12,11 +12,16 @@ if [ -f ./$file ]; then
   exit 0
 fi
 
+func_name="main"
+if [ "$#" -gt 1 ]; then
+	func_name=$2
+fi
+
 echo "#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char** argv)
+int $func_name(int argc, char** argv)
 {
 	return 0;
 }" > $file.c

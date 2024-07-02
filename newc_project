@@ -19,18 +19,24 @@ CC=gcc
 FLAGS=-Wall -Werror -g -fsanitize=address
 LDFLAGS = -lm
 OBJS=">./$dir/Makefile
-echo "we have $# arguments"
+
 if [ "$#" -gt 1 ]; then
 	for((i=2; i<=$#; i++)); do
 		echo -n "${!i}.o ">>./$dir/Makefile;
 	done
-else
-	echo "main.o">>./$dir/Makefile;
 fi
-echo "
-TARGET=main
-MAIN_SOURCE=main.c
 
+echo -n "main.o
+TARGET=$dir
+MAIN_SOURCE=">>./$dir/Makefile;
+
+if [ "$#" -gt 1 ]; then
+	for((i=2; i<=$#; i++)); do
+		echo -n "${!i}.c ">>./$dir/Makefile
+	done
+fi
+
+echo "main.c
 all: \$(TARGET)
 
 \$(TARGET): \$(OBJS)
@@ -51,8 +57,9 @@ clean:
 ">>./$dir/Makefile
 
 for ((i=2; i<=$#; i++));do
-	newc_file ./$dir/"${!i}";
+	newc_file ./$dir/"${!i}" ${!i}
 done
+newc_file ./$dir/main
 
 echo "$dir is created."
 ls -al | grep $dir
