@@ -7,12 +7,6 @@ if [ "$#" -lt "1" ]; then
 	exit 0
 fi
 
-file_names=0
-
-if [ "$#" -gt 1 ]; then
-	file_names=1
-fi
-
 if [ -d ./$dir ]; then
 	echo "$dir already exist in current folder."
 	exit 0
@@ -20,15 +14,15 @@ fi
 
 mkdir ./$dir
 touch ./$dir/Makefile
-echo "
+echo -n "
 CC=gcc
 FLAGS=-Wall -Werror -g -fsanitize=address
 LDFLAGS = -lm
 OBJS=">./$dir/Makefile
-if [$# -gt 1]; then
-
+echo "we have $# arguments"
+if [ "$#" -gt 1 ]; then
 	for((i=2; i<=$#; i++)); do
-		echo "${!i}.o ">>./$dir/Makefile;
+		echo -n "${!i}.o ">>./$dir/Makefile;
 	done
 else
 	echo "main.o">>./$dir/Makefile;
