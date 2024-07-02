@@ -1,10 +1,10 @@
 # C projects help scripts
 Pull the repository and run 
 ```bash
-./run
+sudo ./run
 ```
 Then execute the commands.
 
 Current commands avaliable:
-1. nc\_file
-2. nc\_proj
+1. newc\_file
+2. newc\_project
